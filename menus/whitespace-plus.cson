@@ -6,6 +6,11 @@ menu: [
 			label: "Advanced"
 			submenu: [
 				{
+					label: "Smart Convert"
+					command: "whitespace-plus:smart-convert"
+				}
+				{ type: "separator" }
+				{
 					label: "Convert 1 Space To Tabs"
 					command: "whitespace-plus:convert-1-space-to-tabs"
 				}

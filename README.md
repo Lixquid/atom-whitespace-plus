@@ -26,6 +26,12 @@ func = ( argument ) ->
 	code( more )
 ```
 
+### `smart-convert`
+
+Smart convert will automagically detect what indentation style the current text
+document is using, and convert it to your preferred indentation style. Magic!
+:sparkles:
+
 ## Configuration Options
 
 ### Change Indent Style On Convert

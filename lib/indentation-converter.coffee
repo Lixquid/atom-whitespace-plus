@@ -39,6 +39,8 @@ module.exports = class IndentationConverter
 				@editorConvertToTabs( 6 )
 			"whitespace-plus:convert-8-spaces-to-tabs": =>
 				@editorConvertToTabs( 8 )
+			"whitespace-plus:smart-convert": =>
+				@editorSmartConvert()
 		} ) )
 
 	destroy: ->
@@ -92,3 +94,47 @@ module.exports = class IndentationConverter
 			  "editor.tabLength",
 			  { scope: [ editor.getGrammar().scopeName ] }
 			) )
+
+	editorSmartConvert: ->
+		editor = atom.workspace.getActiveTextEditor()
+		if not editor?
+			return
+
+		scope_arg = { scope: [ editor.getGrammar().scopeName ] }
+		target_len = atom.config.get( "editor.tabLength", scope_arg )
+		target_tab = atom.config.get( "editor.softTabs", scope_arg )
+
+		# Convert Text
+		current_style = @editorGetIndentation()
+		if current_style?
+			if current_style # Soft Tabs
+				@editorConvertToTabs( current_style )
+			if target_tab
+				@editorConvertToSpaces( target_len )
+
+		# Change editor settings
+		editor.setSoftTabs( target_tab )
+		editor.setTabLength( target_len )
+
+	## Utility Functions #######################################################
+
+	editorGetIndentation: ->
+		editor = atom.workspace.getActiveTextEditor()
+		buffer = editor?.getBuffer()
+		tokenized_buffer = editor?.displayBuffer.tokenizedBuffer
+		if not buffer? or not tokenized_buffer?
+			return
+
+		for row in [ 0 .. buffer.getLastRow() ]
+			# Ignore comments
+			if tokenized_buffer.tokenizedLineForRow( row ).isComment()
+				continue
+
+			line = buffer.lineForRow( row )
+			if line.indexOf( '\t' ) == 0
+				return false
+
+			if line.indexOf( ' ' ) == 0
+				return line.match( /^ +/ )[0].length
+
+		return undefined
