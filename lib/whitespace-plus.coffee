@@ -2,6 +2,16 @@
 
 module.exports = WhitespacePlus =
 
+	## Config ##################################################################
+
+	config:
+		changeIndentStyleOnConvert:
+			type: "boolean"
+			default: true
+			description: "If true, the editor will automatically switch to a new
+				indentation style when a conversion command is run."
+
+
 	## Fields ##################################################################
 
 	events: null
@@ -44,10 +54,12 @@ module.exports = WhitespacePlus =
 	## Conversion Functions ####################################################
 
 	editorConvertToSpaces: ( length ) ->
-		buffer = atom.workspace.getActiveTextEditor()?.getBuffer()
+		editor = atom.workspace.getActiveTextEditor()
+		buffer = editor?.getBuffer()
 		if not buffer?
 			return
 
+		# Replace Indentation
 		regex = /^(\t)+/g
 		buffer.scan( regex, ( res ) ->
 			if not res.match[0]?
@@ -57,11 +69,18 @@ module.exports = WhitespacePlus =
 			res.replace( new Array( target ).join( ' ' ) )
 		)
 
+		# Change Editor Indentation style
+		if atom.config.get( "whitespace-plus.changeIndentStyleOnConvert" )
+			editor.setSoftTabs( true )
+			editor.setTabLength( length )
+
 	editorConvertToTabs: ( length ) ->
-		buffer = atom.workspace.getActiveTextEditor()?.getBuffer()
+		editor = atom.workspace.getActiveTextEditor()
+		buffer = editor?.getBuffer()
 		if not buffer?
 			return
 
+		# Replace Indentation
 		regex = new RegExp(
 			"^(" + new Array( length + 1 ).join( ' ' ) + ")+", 'g'
 		)
@@ -72,3 +91,11 @@ module.exports = WhitespacePlus =
 			target = res.match[0].length // length + 1
 			res.replace( new Array( target ).join( '\t' ) )
 		)
+
+		# Change Editor Indentation style
+		if atom.config.get( "whitespace-plus.changeIndentStyleOnConvert" )
+			editor.setSoftTabs( false )
+			editor.setTabLength( atom.config.get(
+			  "editor.tabLength",
+			  { scope: [ editor.getGrammar().scopeName ] }
+			) )

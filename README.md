@@ -25,3 +25,10 @@ func = ( argument ) ->
 	code()
 	code( more )
 ```
+
+## Configuration Options
+
+### Change Indent Style On Convert
+
+With this option enabled, running a conversion command will also change the
+editor's current indentation style, as well as converting the text.
