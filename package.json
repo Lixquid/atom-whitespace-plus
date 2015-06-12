@@ -1,0 +1,12 @@
+{
+  "name": "whitespace-plus",
+  "main": "./lib/whitespace-plus",
+  "version": "0.0.0",
+  "description": "A collection of whitespace related utilities for Atom.",
+  "keywords": [ "whitespace" ],
+  "repository": "https://github.com/lixquid/atom-whitespace-plus",
+  "license": "GNU GPL v3",
+  "engines": {
+    "atom": ">=0.174.0 <2.0.0"
+  }
+}

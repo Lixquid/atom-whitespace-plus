@@ -1,0 +1,60 @@
+menu: [
+	label: "Packages"
+	submenu: [
+		label: "Whitespace"
+		submenu: [
+			label: "Advanced"
+			submenu: [
+				{
+					label: "Convert 1 Space To Tabs"
+					command: "whitespace-plus:convert-1-space-to-tabs"
+				}
+				{
+					label: "Convert 2 Spaces To Tabs"
+					command: "whitespace-plus:convert-2-spaces-to-tabs"
+				}
+				{
+					label: "Convert 3 Spaces To Tabs"
+					command: "whitespace-plus:convert-3-spaces-to-tabs"
+				}
+				{
+					label: "Convert 4 Spaces To Tabs"
+					command: "whitespace-plus:convert-4-spaces-to-tabs"
+				}
+				{
+					label: "Convert 6 Spaces To Tabs"
+					command: "whitespace-plus:convert-6-spaces-to-tabs"
+				}
+				{
+					label: "Convert 8 Spaces To Tabs"
+					command: "whitespace-plus:convert-8-spaces-to-tabs"
+				}
+				{ type: "separator" }
+				{
+					label: "Convert Tabs To 1 Space"
+					command: "whitespace-plus:convert-tabs-to-1-space"
+				}
+				{
+					label: "Convert Tabs To 2 Spaces"
+					command: "whitespace-plus:convert-tabs-to-2-spaces"
+				}
+				{
+					label: "Convert Tabs To 3 Spaces"
+					command: "whitespace-plus:convert-tabs-to-3-spaces"
+				}
+				{
+					label: "Convert Tabs To 4 Spaces"
+					command: "whitespace-plus:convert-tabs-to-4-spaces"
+				}
+				{
+					label: "Convert Tabs To 6 Spaces"
+					command: "whitespace-plus:convert-tabs-to-6-spaces"
+				}
+				{
+					label: "Convert Tabs To 8 Spaces"
+					command: "whitespace-plus:convert-tabs-to-8-spaces"
+				}
+			]
+		]
+	]
+]
