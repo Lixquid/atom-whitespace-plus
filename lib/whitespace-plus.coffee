@@ -25,4 +25,4 @@ module.exports = WhitespacePlus =
 		@converter = new IndentationConverter
 
 	deactivate: ->
-		@converter.dispose()
+		@converter.destroy()
